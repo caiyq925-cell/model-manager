@@ -219,10 +219,21 @@ function renderEditor() {
     check.checked = m.checked;
     check.addEventListener("change", () => { m.checked = check.checked; renderStatOnly(); });
 
+    const idWrap = document.createElement("div");
+    idWrap.className = "model-id-wrap";
     const idEl = document.createElement("span");
     idEl.className = "model-id";
     idEl.textContent = m.id;
     idEl.title = m.id;
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "btn icon-btn";
+    copyBtn.title = "复制模型 ID";
+    copyBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+    copyBtn.addEventListener("click", async () => {
+      const ok = await copyText(m.id);
+      toast(ok ? `已复制模型 ID：${m.id}` : "复制失败", !ok);
+    });
+    idWrap.append(idEl, copyBtn);
 
     const badge = document.createElement("span");
     badge.className = "badge " + m.status;
@@ -240,7 +251,7 @@ function renderEditor() {
     btn.disabled = m.status === "testing";
     btn.addEventListener("click", () => testOne(m.id));
 
-    row.append(check, idEl, badge, btn);
+    row.append(check, idWrap, badge, btn);
     listEl.appendChild(row);
   });
 }

@@ -327,6 +327,10 @@ h1 { font-size: 20px; font-weight: 700; letter-spacing: 0.3px; }
   user-select: text;
   -webkit-user-select: text;
 }
+.model-id-wrap { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.btn.icon-btn { padding: 3px 5px; border-color: transparent; background: transparent; color: #5a6272; flex-shrink: 0; }
+.btn.icon-btn:hover { color: var(--accent); background: var(--accent-soft); border-color: transparent; }
+.btn.icon-btn:active { transform: scale(0.9); }
 
 .model-empty { padding: 40px 0; text-align: center; color: var(--muted); font-size: 13px; }
 
